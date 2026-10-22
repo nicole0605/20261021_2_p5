@@ -95,6 +95,10 @@ function injectStyles() {
     .clock-title { margin: 0 0 8px; color: #29324b; font-size: 23px; font-weight: 700; }
     .clock-time { margin: 12px 0 8px; color: #303d75; font-size: clamp(66px, 12vw, 108px); font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: -6px; line-height: 1.1; }
     .clock-date { color: #7e879b; font-size: 16px; font-weight: 500; }
+    .attendance-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(100%, 600px); margin-top: 26px; }
+    .attendance-field { display: flex; flex-direction: column; gap: 8px; padding: 14px; border: 1px solid #edf0f6; border-radius: 14px; background: #fbfcff; color: #68728a; font-size: 13px; font-weight: 700; }
+    .attendance-input { width: 100%; min-width: 0; height: 42px; padding: 0 10px; border: 1px solid #e5e9f1; border-radius: 10px; outline: none; color: #303d75; background: #fff; font-size: 18px; font-variant-numeric: tabular-nums; font-weight: 700; text-align: center; }
+    .attendance-input:focus { border-color: #7284e8; box-shadow: 0 0 0 3px #5269df18; }
     .clock-note { margin-top: 30px; color: #a0a7b7; font-size: 13px; }
     .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin: 0 0 22px; }
     .section-heading h1 { margin: 5px 0 0; font-size: 28px; letter-spacing: -.7px; }
@@ -172,6 +176,10 @@ function injectStyles() {
       .pomodoro-main { min-height: 385px; padding: 30px 18px 24px; }
       .settings-card { width: 100%; }
       .clock-card { min-height: 390px; }
+      .attendance-fields { gap: 7px; margin-top: 22px; }
+      .attendance-field { gap: 7px; padding: 10px 7px; font-size: 11px; }
+      .attendance-input { height: 40px; padding: 0 5px; font-size: 17px; }
+      .clock-note { margin-top: 22px; }
     }
     @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
   `;
@@ -197,6 +205,17 @@ function buildInterface() {
           <h1 class="clock-title">考試大鐘</h1>
           <div class="clock-time" id="current-time" aria-live="off">--:--:--</div>
           <div class="clock-date" id="exam-date"></div>
+          <div class="attendance-fields" role="group" aria-label="考試人數">
+            <label class="attendance-field" for="attendance-required">應到人數
+              <input class="attendance-input" id="attendance-required" type="number" min="0" step="1" value="0" inputmode="numeric">
+            </label>
+            <label class="attendance-field" for="attendance-present">實到人數
+              <input class="attendance-input" id="attendance-present" type="number" min="0" step="1" value="0" inputmode="numeric">
+            </label>
+            <label class="attendance-field" for="attendance-absent">缺考人數
+              <input class="attendance-input" id="attendance-absent" type="number" min="0" step="1" value="0" inputmode="numeric">
+            </label>
+          </div>
           <p class="clock-note">專心應試，掌握每分每秒</p>
         </div>
       </section>
